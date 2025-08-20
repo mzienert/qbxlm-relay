@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 # Configuration
 ENVIRONMENTS=("dev" "staging" "prod")
 DEFAULT_ENVIRONMENT="dev"
-DEFAULT_REGION="us-east-1"
+DEFAULT_REGION="us-west-1"
 
 # Functions
 log_info() {
@@ -34,7 +34,7 @@ show_usage() {
     echo ""
     echo "Options:"
     echo "  -e, --environment ENV    Target environment (dev|staging|prod) [default: dev]"
-    echo "  -r, --region REGION      AWS region [default: us-east-1]"
+    echo "  -r, --region REGION      AWS region [default: us-west-1]"
     echo "  -b, --bootstrap          Bootstrap CDK in the target account/region"
     echo "  -t, --test              Run tests before deployment"
     echo "  -g, --generate-qwc      Generate QWC files after deployment"
@@ -130,7 +130,7 @@ generate_qwc_files() {
         # Update the generated file with the actual URL
         local qwc_file="assets/qwc-configs/qbxml-relay-$environment.qwc"
         if [ -f "$qwc_file" ]; then
-            sed -i.bak "s|https://your-api-gateway-url.execute-api.us-east-1.amazonaws.com/$environment/qbwc|$api_url|g" "$qwc_file"
+            sed -i.bak "s|https://your-api-gateway-url.execute-api.us-west-1.amazonaws.com/$environment/qbwc|$api_url|g" "$qwc_file"
             log_info "Updated QWC file with actual API URL: $qwc_file"
         fi
     else

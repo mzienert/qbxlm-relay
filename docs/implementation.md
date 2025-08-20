@@ -112,10 +112,10 @@ qbxml-relay/
 #### First-time Setup (Bootstrap CDK)
 ```bash
 # Bootstrap for development
-./scripts/deploy.sh --bootstrap --environment dev --region us-east-1
+./scripts/deploy.sh --bootstrap --environment dev --region us-west-1
 
 # Or manually
-cdk bootstrap aws://$(aws sts get-caller-identity --query Account --output text)/us-east-1
+cdk bootstrap aws://$(aws sts get-caller-identity --query Account --output text)/us-west-1
 ```
 
 #### Deploy to Development

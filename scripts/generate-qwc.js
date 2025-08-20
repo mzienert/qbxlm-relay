@@ -96,7 +96,7 @@ function generateQwcFiles() {
   // Generate files for each environment
   Object.keys(environments).forEach(env => {
     // Default URL pattern - will be updated after deployment
-    const defaultUrl = `https://your-api-gateway-url.execute-api.us-east-1.amazonaws.com/${env}/qbwc`;
+    const defaultUrl = `https://your-api-gateway-url.execute-api.us-west-1.amazonaws.com/${env}/qbwc`;
     
     const qwcContent = generateQwcContent(env, defaultUrl);
     const filename = `qbxml-relay-${env}.qwc`;
@@ -134,7 +134,7 @@ aws cloudformation describe-stacks --stack-name QbxmlRelayStack-{environment} --
 
 Replace "your-api-gateway-url" in the AppURL with your actual API Gateway URL:
 \`\`\`
-<AppURL>https://abc123def4.execute-api.us-east-1.amazonaws.com/dev/qbwc</AppURL>
+<AppURL>https://abc123def4.execute-api.us-west-1.amazonaws.com/dev/qbwc</AppURL>
 \`\`\`
 `;
 

@@ -2,7 +2,7 @@
 <QBWCXML>
   <AppName>QBXML Relay Service</AppName>
   <AppID>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</AppID>
-  <AppURL>https://your-api-gateway-url.execute-api.us-east-1.amazonaws.com/dev/qbwc</AppURL>
+  <AppURL>https://your-api-gateway-url.execute-api.us-west-1.amazonaws.com/dev/qbwc</AppURL>
   <AppDescription>QuickBooks Desktop Enterprise to ZOHO CRM integration relay service. Synchronizes customer data between QuickBooks and ZOHO CRM.</AppDescription>
   <AppDisplayName>QBXML Relay Service</AppDisplayName>
   <AppUniqueName>qbxml-relay-dev</AppUniqueName>

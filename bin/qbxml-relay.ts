@@ -10,7 +10,7 @@ const environment = app.node.tryGetContext('environment') || 'dev';
 new QbxmlRelayStack(app, `QbxmlRelayStack-${environment}`, {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION || 'us-east-1',
+    region: process.env.CDK_DEFAULT_REGION || 'us-west-1',
   },
   environment,
 });
