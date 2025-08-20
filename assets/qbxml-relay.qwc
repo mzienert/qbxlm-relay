@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<QBWCXML>
+  <AppName>QBXML Relay Service</AppName>
+  <AppID>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</AppID>
+  <AppURL>https://your-api-gateway-url.execute-api.us-east-1.amazonaws.com/dev/qbwc</AppURL>
+  <AppDescription>QuickBooks Desktop Enterprise to ZOHO CRM integration relay service. Synchronizes customer data between QuickBooks and ZOHO CRM.</AppDescription>
+  <AppDisplayName>QBXML Relay Service</AppDisplayName>
+  <AppUniqueName>qbxml-relay-dev</AppUniqueName>
+  <AppVersion>1.0.0</AppVersion>
+  <Owner>QBXML Relay Team</Owner>
+  <FileID>{B2C3D4E5-F6A7-8901-BCDE-F23456789012}</FileID>
+  <QBType>QBFS</QBType>
+  <Style>Document</Style>
+  <UsingEvents>0</UsingEvents>
+  <PersonalDataPref>pdpOptional</PersonalDataPref>
+  <UnattendedModePref>umpOptional</UnattendedModePref>
+  <AuthFlags>0x0</AuthFlags>
+  <Notify>0</Notify>
+  <IsReadOnly>0</IsReadOnly>
+  <UpdatePolicy>automatic</UpdatePolicy>
+  <RunEveryNMinutes>60</RunEveryNMinutes>
+  <Scheduler>
+    <RunEveryNMinutes>60</RunEveryNMinutes>
+    <RunEveryNSeconds>0</RunEveryNSeconds>
+    <RunEveryNHours>0</RunEveryNHours>
+    <RunEveryNDays>0</RunEveryNDays>
+    <RunEveryNWeeks>0</RunEveryNWeeks>
+    <RunEveryNMonths>0</RunEveryNMonths>
+    <BeginTime>08:00:00</BeginTime>
+    <EndTime>18:00:00</EndTime>
+    <MonTue>true</MonTue>
+    <TueWed>true</TueWed>
+    <WedThu>true</WedThu>
+    <ThuFri>true</ThuFri>
+    <FriSat>false</FriSat>
+    <SatSun>false</SatSun>
+    <SunMon>false</SunMon>
+  </Scheduler>
+</QBWCXML>
