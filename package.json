@@ -1,0 +1,60 @@
+{
+  "name": "qbxml-relay",
+  "version": "1.0.0",
+  "description": "QuickBooks Desktop Enterprise to ZOHO CRM integration service",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "cdk": "cdk",
+    "deploy": "npm run build && cdk deploy",
+    "deploy:dev": "npm run build && cdk deploy --context environment=dev",
+    "deploy:staging": "npm run build && cdk deploy --context environment=staging",
+    "deploy:prod": "npm run build && cdk deploy --context environment=prod",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "bootstrap": "cdk bootstrap",
+    "generate-qwc": "node scripts/generate-qwc.js",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "keywords": [
+    "quickbooks",
+    "qbxml",
+    "zoho",
+    "crm",
+    "integration",
+    "aws",
+    "lambda",
+    "cdk"
+  ],
+  "author": "QBXML Relay Team",
+  "license": "MIT",
+  "dependencies": {
+    "aws-cdk-lib": "^2.100.0",
+    "constructs": "^10.3.0",
+    "aws-lambda": "^1.0.7",
+    "@aws-sdk/client-dynamodb": "^3.400.0",
+    "@aws-sdk/lib-dynamodb": "^3.400.0",
+    "uuid": "^9.0.0",
+    "fast-xml-parser": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "@types/jest": "^29.5.5",
+    "@types/uuid": "^9.0.0",
+    "@types/aws-lambda": "^8.10.119",
+    "typescript": "^5.2.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "aws-cdk": "^2.100.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
