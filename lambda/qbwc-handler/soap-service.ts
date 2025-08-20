@@ -239,7 +239,7 @@ export class SoapService {
             }
 
             // Phase 3 preparation: This is where ZOHO integration will happen
-            console.log('ZOHO Integration Stub: Ready to send', processingResult.data.length, 'customer records to ZOHO CRM');
+            console.log('ZOHO Integration Stub: Ready to send', processingResult.data?.length || 0, 'customer records to ZOHO CRM');
 
           } else {
             console.error('QBXML processing failed:', processingResult.errors);
@@ -250,7 +250,7 @@ export class SoapService {
           
           // Fallback to original parsing for backwards compatibility
           try {
-            const parsedResponse = this.xmlParser.parse(response);
+            this.xmlParser.parse(response);
             console.log('Fallback: Basic QBXML parsing completed');
             console.log('ZOHO Integration Stub: Would process customer data here (fallback mode)');
           } catch (parseError) {
