@@ -1,5 +1,5 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
-import { SessionManager, QBWCSession } from './session-manager';
+import { SessionManager } from './session-manager';
 
 export interface SoapMethodResult {
   methodName: string;
@@ -19,7 +19,6 @@ export class SoapService {
       ignoreAttributes: false,
       attributeNamePrefix: '@_',
       textNodeName: '#text',
-      ignoreNameSpace: false,
     });
 
     // Configure XML builder
