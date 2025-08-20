@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <CustomerQueryRs requestID="1" statusCode="1" statusSeverity="Error" statusMessage="QuickBooks found an error when parsing the provided XML text stream.">
+      <!-- This is an example of an error response from QuickBooks -->
+      <!-- Status codes:
+           0 = Success
+           1 = General error
+           500 = QuickBooks is not open
+           3120 = Object not found
+           3140 = Access denied
+      -->
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

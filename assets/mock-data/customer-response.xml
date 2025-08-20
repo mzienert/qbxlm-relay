@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <CustomerQueryRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CustomerRet>
+        <ListID>80000001-1234567890</ListID>
+        <TimeCreated>2024-01-15T10:30:00-08:00</TimeCreated>
+        <TimeModified>2024-01-20T14:45:00-08:00</TimeModified>
+        <EditSequence>1234567890</EditSequence>
+        <Name>Sample Customer 001</Name>
+        <FullName>Sample Customer 001</FullName>
+        <IsActive>true</IsActive>
+        <CompanyName>Sample Company Inc.</CompanyName>
+        <Salutation>Mr.</Salutation>
+        <FirstName>John</FirstName>
+        <MiddleName>A</MiddleName>
+        <LastName>Smith</LastName>
+        <BillAddress>
+          <Addr1>123 Main Street</Addr1>
+          <Addr2>Suite 100</Addr2>
+          <City>San Francisco</City>
+          <State>CA</State>
+          <PostalCode>94102</PostalCode>
+          <Country>USA</Country>
+        </BillAddress>
+        <ShipAddress>
+          <Addr1>123 Main Street</Addr1>
+          <Addr2>Suite 100</Addr2>
+          <City>San Francisco</City>
+          <State>CA</State>
+          <PostalCode>94102</PostalCode>
+          <Country>USA</Country>
+        </ShipAddress>
+        <Phone>415-555-0123</Phone>
+        <AltPhone>415-555-0124</AltPhone>
+        <Fax>415-555-0125</Fax>
+        <Email>john.smith@samplecompany.com</Email>
+        <Contact>John Smith</Contact>
+        <AltContact>Jane Doe</AltContact>
+        <CustomerTypeRef>
+          <ListID>80000002-1234567891</ListID>
+          <FullName>Retail</FullName>
+        </CustomerTypeRef>
+        <TermsRef>
+          <ListID>80000003-1234567892</ListID>
+          <FullName>Net 30</FullName>
+        </TermsRef>
+        <SalesRepRef>
+          <ListID>80000004-1234567893</ListID>
+          <FullName>Sales Rep 1</FullName>
+        </SalesRepRef>
+        <Balance>1250.00</Balance>
+        <TotalBalance>1250.00</TotalBalance>
+        <SalesTaxCodeRef>
+          <ListID>80000005-1234567894</ListID>
+          <FullName>Tax</FullName>
+        </SalesTaxCodeRef>
+        <ItemSalesTaxRef>
+          <ListID>80000006-1234567895</ListID>
+          <FullName>CA Sales Tax</FullName>
+        </ItemSalesTaxRef>
+        <CreditLimit>5000.00</CreditLimit>
+        <AccountNumber>CUST001</AccountNumber>
+        <CreditCardInfo>
+          <CreditCardNumber>****-****-****-1234</CreditCardNumber>
+          <ExpirationMonth>12</ExpirationMonth>
+          <ExpirationYear>2025</ExpirationYear>
+          <NameOnCard>John A Smith</NameOnCard>
+          <CreditCardAddress>123 Main Street, San Francisco, CA 94102</CreditCardAddress>
+          <CreditCardPostalCode>94102</CreditCardPostalCode>
+        </CreditCardInfo>
+        <JobStatus>None</JobStatus>
+        <JobStartDate>2024-01-15</JobStartDate>
+        <JobProjectedEndDate>2024-12-31</JobProjectedEndDate>
+        <JobEndDate>2024-12-31</JobEndDate>
+        <JobDesc>Sample project description</JobDesc>
+        <JobTypeRef>
+          <ListID>80000007-1234567896</ListID>
+          <FullName>Standard</FullName>
+        </JobTypeRef>
+        <Notes>Sample customer notes for testing ZOHO integration</Notes>
+        <IsStatementWithParent>false</IsStatementWithParent>
+        <DeliveryMethod>Print</DeliveryMethod>
+        <PriceLevelRef>
+          <ListID>80000008-1234567897</ListID>
+          <FullName>Standard Price Level</FullName>
+        </PriceLevelRef>
+        <ExternalGUID>{12345678-1234-5678-9ABC-123456789012}</ExternalGUID>
+      </CustomerRet>
+      
+      <CustomerRet>
+        <ListID>80000009-1234567898</ListID>
+        <TimeCreated>2024-01-16T11:00:00-08:00</TimeCreated>
+        <TimeModified>2024-01-21T09:30:00-08:00</TimeModified>
+        <EditSequence>1234567891</EditSequence>
+        <Name>Sample Customer 002</Name>
+        <FullName>Sample Customer 002</FullName>
+        <IsActive>true</IsActive>
+        <CompanyName>Another Company LLC</CompanyName>
+        <Salutation>Ms.</Salutation>
+        <FirstName>Sarah</FirstName>
+        <LastName>Johnson</LastName>
+        <BillAddress>
+          <Addr1>456 Oak Avenue</Addr1>
+          <City>Los Angeles</City>
+          <State>CA</State>
+          <PostalCode>90210</PostalCode>
+          <Country>USA</Country>
+        </BillAddress>
+        <Phone>323-555-0456</Phone>
+        <Email>sarah.johnson@anothercompany.com</Email>
+        <Contact>Sarah Johnson</Contact>
+        <CustomerTypeRef>
+          <ListID>80000002-1234567891</ListID>
+          <FullName>Retail</FullName>
+        </CustomerTypeRef>
+        <TermsRef>
+          <ListID>80000010-1234567899</ListID>
+          <FullName>Net 15</FullName>
+        </TermsRef>
+        <Balance>750.50</Balance>
+        <TotalBalance>750.50</TotalBalance>
+        <CreditLimit>2500.00</CreditLimit>
+        <AccountNumber>CUST002</AccountNumber>
+        <Notes>Second sample customer for testing multiple records</Notes>
+        <DeliveryMethod>Email</DeliveryMethod>
+        <ExternalGUID>{87654321-4321-8765-CBA9-876543210987}</ExternalGUID>
+      </CustomerRet>
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

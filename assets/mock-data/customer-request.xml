@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerQueryRq requestID="1">
+      <MaxReturned>100</MaxReturned>
+      <FromModifiedDate>2024-01-01T00:00:00</FromModifiedDate>
+      <ToModifiedDate>2024-12-31T23:59:59</ToModifiedDate>
+      <IncludeRetElement>ListID</IncludeRetElement>
+      <IncludeRetElement>TimeCreated</IncludeRetElement>
+      <IncludeRetElement>TimeModified</IncludeRetElement>
+      <IncludeRetElement>EditSequence</IncludeRetElement>
+      <IncludeRetElement>Name</IncludeRetElement>
+      <IncludeRetElement>FullName</IncludeRetElement>
+      <IncludeRetElement>IsActive</IncludeRetElement>
+      <IncludeRetElement>CompanyName</IncludeRetElement>
+      <IncludeRetElement>Salutation</IncludeRetElement>
+      <IncludeRetElement>FirstName</IncludeRetElement>
+      <IncludeRetElement>MiddleName</IncludeRetElement>
+      <IncludeRetElement>LastName</IncludeRetElement>
+      <IncludeRetElement>BillAddress</IncludeRetElement>
+      <IncludeRetElement>ShipAddress</IncludeRetElement>
+      <IncludeRetElement>Phone</IncludeRetElement>
+      <IncludeRetElement>AltPhone</IncludeRetElement>
+      <IncludeRetElement>Fax</IncludeRetElement>
+      <IncludeRetElement>Email</IncludeRetElement>
+      <IncludeRetElement>Contact</IncludeRetElement>
+      <IncludeRetElement>AltContact</IncludeRetElement>
+      <IncludeRetElement>CustomerTypeRef</IncludeRetElement>
+      <IncludeRetElement>TermsRef</IncludeRetElement>
+      <IncludeRetElement>SalesRepRef</IncludeRetElement>
+      <IncludeRetElement>Balance</IncludeRetElement>
+      <IncludeRetElement>TotalBalance</IncludeRetElement>
+      <IncludeRetElement>SalesTaxCodeRef</IncludeRetElement>
+      <IncludeRetElement>ItemSalesTaxRef</IncludeRetElement>
+      <IncludeRetElement>CreditLimit</IncludeRetElement>
+      <IncludeRetElement>AccountNumber</IncludeRetElement>
+      <IncludeRetElement>CreditCardInfo</IncludeRetElement>
+      <IncludeRetElement>JobStatus</IncludeRetElement>
+      <IncludeRetElement>JobStartDate</IncludeRetElement>
+      <IncludeRetElement>JobProjectedEndDate</IncludeRetElement>
+      <IncludeRetElement>JobEndDate</IncludeRetElement>
+      <IncludeRetElement>JobDesc</IncludeRetElement>
+      <IncludeRetElement>JobTypeRef</IncludeRetElement>
+      <IncludeRetElement>Notes</IncludeRetElement>
+      <IncludeRetElement>IsStatementWithParent</IncludeRetElement>
+      <IncludeRetElement>DeliveryMethod</IncludeRetElement>
+      <IncludeRetElement>PriceLevelRef</IncludeRetElement>
+      <IncludeRetElement>ExternalGUID</IncludeRetElement>
+    </CustomerQueryRq>
+  </QBXMLMsgsRq>
+</QBXML>
