@@ -105,10 +105,6 @@ export class SessionManager {
           TableName: this.tableName,
           Key: { ticket },
           UpdateExpression: 'SET lastActivity = :lastActivity, requestsSent = requestsSent + :inc',
-          ExpressionAttributeValues: {
-            ':lastActivity': now,
-            ':inc': 1,
-          },
           ConditionExpression: 'attribute_exists(ticket) AND #status = :activeStatus',
           ExpressionAttributeNames: {
             '#status': 'status',

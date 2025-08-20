@@ -97,47 +97,40 @@ export class QbwcApiConstruct extends Construct {
     // Lambda integration with proxy
     const lambdaIntegration = new apigateway.LambdaIntegration(this.lambdaFunction, {
       requestTemplates: {
-        'application/json': JSON.stringify({
-          body: '$input.body',
-          headers: {
-            '#foreach($header in $input.params().header.keySet())',
-            '"$header": "$util.escapeJavaScript($input.params().header.get($header))"',
-            '#if($foreach.hasNext),#end',
-            '#end'
+        'application/json': `{
+          "body": $input.json('$'),
+          "headers": {
+            #foreach($header in $input.params().header.keySet())
+            "$header": "$util.escapeJavaScript($input.params().header.get($header))"#if($foreach.hasNext),#end
+            #end
           },
-          method: '$context.httpMethod',
-          path: '$context.resourcePath',
-          queryStringParameters: {
-            '#foreach($param in $input.params().querystring.keySet())',
-            '"$param": "$util.escapeJavaScript($input.params().querystring.get($param))"',
-            '#if($foreach.hasNext),#end',
-            '#end'
+          "method": "$context.httpMethod",
+          "path": "$context.resourcePath",
+          "queryStringParameters": {
+            #foreach($param in $input.params().querystring.keySet())
+            "$param": "$util.escapeJavaScript($input.params().querystring.get($param))"#if($foreach.hasNext),#end
+            #end
+          }
+        }`,
+        'text/xml': `{
+          "body": "$input.body",
+          "headers": {
+            #foreach($header in $input.params().header.keySet())
+            "$header": "$util.escapeJavaScript($input.params().header.get($header))"#if($foreach.hasNext),#end
+            #end
           },
-        }),
-        'text/xml': JSON.stringify({
-          body: '$input.body',
-          headers: {
-            '#foreach($header in $input.params().header.keySet())',
-            '"$header": "$util.escapeJavaScript($input.params().header.get($header))"',
-            '#if($foreach.hasNext),#end',
-            '#end'
-          },
-          method: '$context.httpMethod',
-          path: '$context.resourcePath',
-          queryStringParameters: {
-            '#foreach($param in $input.params().querystring.keySet())',
-            '"$param": "$util.escapeJavaScript($input.params().querystring.get($param))"',
-            '#if($foreach.hasNext),#end',
-            '#end'
-          },
-        }),
+          "method": "$context.httpMethod",
+          "path": "$context.resourcePath",
+          "queryStringParameters": {
+            #foreach($param in $input.params().querystring.keySet())
+            "$param": "$util.escapeJavaScript($input.params().querystring.get($param))"#if($foreach.hasNext),#end
+            #end
+          }
+        }`,
       },
       integrationResponses: [
         {
           statusCode: '200',
-          responseParameters: {
-            'method.response.header.Content-Type': 'integration.response.header.Content-Type',
-          },
         },
         {
           statusCode: '400',
@@ -153,12 +146,7 @@ export class QbwcApiConstruct extends Construct {
     // POST method for SOAP requests
     qbwcResource.addMethod('POST', lambdaIntegration, {
       methodResponses: [
-        {
-          statusCode: '200',
-          responseParameters: {
-            'method.response.header.Content-Type': true,
-          },
-        },
+        { statusCode: '200' },
         { statusCode: '400' },
         { statusCode: '500' },
       ],
@@ -172,21 +160,8 @@ export class QbwcApiConstruct extends Construct {
       ],
     });
 
-    // Add resource policy for API Gateway (optional security)
-    this.api.addToResourcePolicy(
-      new iam.PolicyStatement({
-        principals: [new iam.AnyPrincipal()],
-        actions: ['execute-api:Invoke'],
-        resources: [`${this.api.arnForExecuteApi()}/*`],
-        conditions: {
-          IpAddress: {
-            'aws:sourceIp': [
-              '0.0.0.0/0', // Allow all IPs for now - restrict in production
-            ],
-          },
-        },
-      })
-    );
+    // Resource policy removed to avoid circular dependency
+    // Can be added later if IP restrictions are needed
 
     // Tags
     cdk.Tags.of(this).add('Component', 'QBWC-API');
