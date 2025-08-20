@@ -24,7 +24,8 @@ export class QbxmlRelayStack extends cdk.Stack {
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       timeToLiveAttribute: 'ttl',
       removalPolicy: environment === 'prod' ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
-      pointInTimeRecovery: environment === 'prod',
+      // pointInTimeRecovery disabled - unnecessary for ephemeral session data with 24h TTL
+      pointInTimeRecovery: false,
     });
 
     // CloudWatch Log Group for Lambda functions

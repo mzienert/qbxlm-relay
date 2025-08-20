@@ -16,7 +16,7 @@ This project creates a relay service that connects QuickBooks Desktop Enterprise
 
 ## Current Status
 
-**Phase 1 - QBWC Infrastructure Setup** ✅ **COMPLETE**
+**Phase 1 - QBWC Infrastructure Setup** ✅ **COMPLETE & DEPLOYED**
 - ✅ Project planning and architecture design
 - ✅ AWS CDK infrastructure setup
 - ✅ QBWC authentication implementation
@@ -24,6 +24,10 @@ This project creates a relay service that connects QuickBooks Desktop Enterprise
 - ✅ Mock QBXML testing data
 - ✅ ZOHO integration stub
 - ✅ Unit tests and deployment automation
+- ✅ **Successfully deployed to AWS (Development)**
+  - API Endpoint: https://y8cis4na46.execute-api.us-west-1.amazonaws.com/dev/
+  - Health Check: ✅ Working
+  - SOAP Authentication: ✅ Working
 
 **Phase 2 - QBXML Processing** (Next)
 - 🔄 QBXML data parsing and validation
@@ -70,6 +74,7 @@ This project creates a relay service that connects QuickBooks Desktop Enterprise
    - Import generated QWC file from `assets/qwc-configs/qbxml-relay-dev.qwc`
    - Use credentials: username=`qbuser`, password=`qbpass123`
    - Test connection in QBWC
+   - **Current Development API**: https://y8cis4na46.execute-api.us-west-1.amazonaws.com/dev/qbwc
 
 ## Testing
 
@@ -88,7 +93,11 @@ npm run test:watch  # Watch mode for development
 
 ### Health Check
 ```bash
-curl https://your-api-gateway-url.amazonaws.com/dev/qbwc
+# Current Development Environment
+curl https://y8cis4na46.execute-api.us-west-1.amazonaws.com/dev/qbwc
+
+# Expected Response:
+# {"service":"QBXML Relay Service","status":"healthy","timestamp":"2025-08-20T03:51:01.399Z","environment":"dev"}
 ```
 
 ## Deployment
