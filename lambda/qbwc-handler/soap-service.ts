@@ -1,5 +1,7 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import { SessionManager } from './session-manager';
+import { QBXMLProcessor } from './qbxml/processor';
+import { QBEntityType } from './qbxml/types';
 
 export interface SoapMethodResult {
   methodName: string;
@@ -10,6 +12,7 @@ export class SoapService {
   private xmlParser: XMLParser;
   private xmlBuilder: XMLBuilder;
   private sessionManager: SessionManager;
+  private qbxmlProcessor: QBXMLProcessor;
 
   constructor(sessionManager: SessionManager) {
     this.sessionManager = sessionManager;
@@ -28,6 +31,13 @@ export class SoapService {
       textNodeName: '#text',
       format: true,
       suppressEmptyNode: true,
+    });
+
+    // Initialize QBXML processor for Phase 2
+    this.qbxmlProcessor = new QBXMLProcessor({
+      validationEnabled: true,
+      transformationEnabled: true,
+      errorHandlingEnabled: true
     });
   }
 
@@ -199,20 +209,53 @@ export class SoapService {
 
       // Parse the response if successful
       if (hresult === '0' || hresult === '') {
-        // Success - process the QBXML response
-        console.log('Processing successful QBXML response');
+        // Success - process the QBXML response using Phase 2 processor
+        console.log('Processing successful QBXML response with Phase 2 processor');
         
         try {
-          // Parse the QBXML response
-          const parsedResponse = this.xmlParser.parse(response);
-          console.log('Parsed QBXML Response:', JSON.stringify(parsedResponse, null, 2));
+          // Use the new QBXML processor to validate and transform the response
+          const processingResult = await this.qbxmlProcessor.processQBXMLResponse(
+            response,
+            QBEntityType.CUSTOMER, // Assuming customer data for this example
+            {
+              validateSchema: true,
+              transformData: true,
+              handleErrors: true
+            }
+          );
 
-          // TODO: Phase 2 - Transform and send to ZOHO CRM
-          // For now, just log the data
-          console.log('ZOHO Integration Stub: Would process customer data here');
+          if (processingResult.success) {
+            console.log(`Successfully processed ${processingResult.metadata.recordCount} records`);
+            console.log('Processing time:', processingResult.metadata.processingTimeMs, 'ms');
+            
+            // Log the structured data
+            if (processingResult.data && processingResult.data.length > 0) {
+              console.log('Transformed customer data:', JSON.stringify(processingResult.data[0], null, 2));
+            }
 
-        } catch (parseError) {
-          console.error('Error parsing QBXML response:', parseError);
+            // Log any warnings
+            if (processingResult.warnings.length > 0) {
+              console.log('Processing warnings:', processingResult.warnings);
+            }
+
+            // Phase 3 preparation: This is where ZOHO integration will happen
+            console.log('ZOHO Integration Stub: Ready to send', processingResult.data.length, 'customer records to ZOHO CRM');
+
+          } else {
+            console.error('QBXML processing failed:', processingResult.errors);
+          }
+
+        } catch (processingError) {
+          console.error('Error in Phase 2 QBXML processing:', processingError);
+          
+          // Fallback to original parsing for backwards compatibility
+          try {
+            const parsedResponse = this.xmlParser.parse(response);
+            console.log('Fallback: Basic QBXML parsing completed');
+            console.log('ZOHO Integration Stub: Would process customer data here (fallback mode)');
+          } catch (parseError) {
+            console.error('Error in fallback parsing:', parseError);
+          }
         }
       } else {
         // Error occurred in QuickBooks
