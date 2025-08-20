@@ -1,10 +1,64 @@
-node_modules
-cdk.out
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# CDK
+lib/
+cdk.out/
+*.js
+*.js.map
+*.d.ts
+
+# AWS
+.aws/
+
+# Environment variables
 .env
-.DS_Store
-.idea
-.vscode
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+
+# Generated QWC files with real URLs
+assets/qwc-configs/
+*.qwc.bak
+
+# Lock files (choose one)
+package-lock.json
+# yarn.lock
+
+# CDK Context
+cdk.context.json
+
+# Local development
+.local/
