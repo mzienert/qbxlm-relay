@@ -16,29 +16,204 @@ This project creates a relay service that connects QuickBooks Desktop Enterprise
 
 ## Current Status
 
-**Phase 1 - QBWC Infrastructure Setup** (In Progress)
+**Phase 1 - QBWC Infrastructure Setup** ✅ **COMPLETE**
 - ✅ Project planning and architecture design
-- 🔄 AWS CDK infrastructure setup
-- 🔄 QBWC authentication implementation
-- 🔄 QWC connection file generation
-- 🔄 Mock QBXML testing data
-- 🔄 ZOHO integration stub
+- ✅ AWS CDK infrastructure setup
+- ✅ QBWC authentication implementation
+- ✅ QWC connection file generation
+- ✅ Mock QBXML testing data
+- ✅ ZOHO integration stub
+- ✅ Unit tests and deployment automation
+
+**Phase 2 - QBXML Processing** (Next)
+- 🔄 QBXML data parsing and validation
+- 🔄 Data transformation utilities
+- 🔄 Error handling and retry logic
+
+**Phase 3 - ZOHO CRM Integration** (Future)
+- 🔄 ZOHO CRM API client
+- 🔄 Data mapping and synchronization
+- 🔄 Bidirectional sync capabilities
 
 ## Quick Start
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Deploy infrastructure: `npm run deploy`
-4. Configure QuickBooks Web Connector with generated `.qwc` file
+### Prerequisites
+- AWS CLI configured with appropriate permissions
+- Node.js 20+ (Latest LTS for Lambda)
+- QuickBooks Desktop Enterprise
+- QuickBooks Web Connector
+
+### Installation & Deployment
+
+1. **Clone and install dependencies:**
+   ```bash
+   git clone <repository-url>
+   cd qbxml-relay
+   npm install
+   ```
+
+2. **Bootstrap CDK (first time only):**
+   ```bash
+   npm run bootstrap
+   # or
+   ./scripts/deploy.sh --bootstrap
+   ```
+
+3. **Deploy to development:**
+   ```bash
+   npm run deploy:dev
+   # or with full options
+   ./scripts/deploy.sh -e dev -t -g
+   ```
+
+4. **Configure QuickBooks Web Connector:**
+   - Import generated QWC file from `assets/qwc-configs/qbxml-relay-dev.qwc`
+   - Use credentials: username=`qbuser`, password=`qbpass123`
+   - Test connection in QBWC
+
+## Testing
+
+### Run Unit Tests
+```bash
+npm test
+npm run test:watch  # Watch mode for development
+```
+
+### Manual Testing
+1. Deploy to development environment
+2. Import QWC file into QuickBooks Web Connector
+3. Start QuickBooks Desktop Enterprise
+4. Run Web Connector to test authentication and data exchange
+5. Check CloudWatch logs for debugging
+
+### Health Check
+```bash
+curl https://your-api-gateway-url.amazonaws.com/dev/qbwc
+```
+
+## Deployment
+
+### Environment Options
+- **dev**: Development environment with verbose logging
+- **staging**: Pre-production testing environment  
+- **prod**: Production environment with optimized settings
+
+### Deployment Commands
+```bash
+# Development (recommended for testing)
+./scripts/deploy.sh -e dev -t -g
+
+# Staging
+./scripts/deploy.sh -e staging -d -g
+
+# Production (with confirmation)
+./scripts/deploy.sh -e prod -d -g
+
+# Options:
+# -t, --test         Run tests before deployment
+# -g, --generate-qwc Generate QWC files after deployment
+# -d, --diff         Show differences before deployment
+# -b, --bootstrap    Bootstrap CDK only
+```
+
+### Post-Deployment
+1. Get API Gateway URL from AWS Console or CLI:
+   ```bash
+   aws cloudformation describe-stacks --stack-name QbxmlRelayStack-dev \
+     --query 'Stacks[0].Outputs[?OutputKey==`ApiEndpoint`].OutputValue' --output text
+   ```
+
+2. Import the generated QWC file into QuickBooks Web Connector
+
+3. Configure authentication credentials in QBWC
+
+## Project Structure
+
+```
+qbxml-relay/
+├── bin/                          # CDK entry point
+│   └── qbxml-relay.ts
+├── lib/                          # CDK infrastructure code
+│   ├── qbxml-relay-stack.ts      # Main CDK stack
+│   └── constructs/
+│       └── qbwc-api.ts           # API Gateway + Lambda construct
+├── lambda/                       # Lambda function code
+│   └── qbwc-handler/
+│       ├── index.ts              # Lambda entry point
+│       ├── soap-service.ts       # SOAP service implementation
+│       └── session-manager.ts    # DynamoDB session management
+├── assets/                       # Configuration and mock data
+│   ├── mock-data/                # Sample QBXML data for testing
+│   ├── qbxml-relay.qwc          # Base QWC template
+│   └── qwc-configs/             # Generated environment-specific QWC files
+├── scripts/                      # Deployment and utility scripts
+│   ├── deploy.sh                # Main deployment script
+│   └── generate-qwc.js          # QWC file generator
+├── test/                        # Unit and integration tests
+│   ├── setup.ts                 # Jest test setup
+│   └── qbwc-handler.test.ts     # Lambda handler tests
+└── docs/                        # Documentation
+    ├── architecture.md
+    └── implementation.md
+```
+
+## Key Features
+
+- **Serverless Architecture**: Built on AWS Lambda for automatic scaling
+- **SOAP Protocol Support**: Full QBWC SOAP method implementation
+- **Session Management**: Stateful session tracking with DynamoDB
+- **Environment Separation**: Dev/staging/prod deployment environments
+- **Comprehensive Testing**: Unit tests with mocked AWS services
+- **Automated Deployment**: One-command deployment with validation
+- **QWC File Generation**: Automatic configuration file creation
+- **Monitoring Ready**: CloudWatch logs and metrics integration
+
+## Troubleshooting
+
+### Common Issues
+
+1. **CDK Bootstrap Required**
+   ```bash
+   aws sts get-caller-identity  # Verify AWS credentials
+   cdk bootstrap aws://ACCOUNT-NUMBER/REGION
+   ```
+
+2. **TypeScript Compilation Errors**
+   ```bash
+   npm run build  # Check for build errors
+   npm run lint   # Check for linting issues
+   ```
+
+3. **QBWC Connection Fails**
+   - Verify API Gateway URL in QWC file
+   - Check CloudWatch logs for authentication errors
+   - Ensure QuickBooks Desktop is running
+   - Verify QBWC service is started
+
+4. **DynamoDB Permissions**
+   - CDK automatically creates IAM roles
+   - Verify stack deployment completed successfully
+
+### Logging and Monitoring
+
+- **CloudWatch Logs**: `/aws/lambda/qbxml-relay-{environment}`
+- **API Gateway Logs**: Enabled for all environments
+- **DynamoDB Metrics**: Available in CloudWatch
+- **Health Check Endpoint**: `GET /qbwc` returns service status
 
 ## Documentation
 
 - [Architecture Overview](./docs/architecture.md)
 - [Implementation Guide](./docs/implementation.md)
 
-## Requirements
+## Contributing
 
-- AWS CLI configured
-- Node.js 20+ (Latest LTS for Lambda)
-- QuickBooks Desktop Enterprise
-- QuickBooks Web Connector
+1. Fork the repository
+2. Create a feature branch
+3. Run tests: `npm test`
+4. Deploy to dev environment for testing
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details
