@@ -36,13 +36,12 @@ show_usage() {
     echo "  -e, --environment ENV    Target environment (dev|staging|prod) [default: dev]"
     echo "  -r, --region REGION      AWS region [default: us-west-1]"
     echo "  -b, --bootstrap          Bootstrap CDK in the target account/region"
-    echo "  -t, --test              Run tests before deployment"
     echo "  -g, --generate-qwc      Generate QWC files after deployment"
     echo "  -d, --diff              Show differences before deployment"
     echo "  -h, --help              Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0 -e dev -t                    # Deploy to dev with tests"
+    echo "  $0 -e dev                       # Deploy to dev (tests run automatically)"
     echo "  $0 -e prod -r us-west-2 -g      # Deploy to prod in us-west-2 and generate QWC"
     echo "  $0 -b                           # Bootstrap CDK only"
 }
@@ -146,7 +145,6 @@ main() {
     local environment=$DEFAULT_ENVIRONMENT
     local region=$DEFAULT_REGION
     local bootstrap_only=false
-    local run_tests_flag=false
     local generate_qwc_flag=false
     local show_diff_flag=false
     
@@ -163,10 +161,6 @@ main() {
                 ;;
             -b|--bootstrap)
                 bootstrap_only=true
-                shift
-                ;;
-            -t|--test)
-                run_tests_flag=true
                 shift
                 ;;
             -g|--generate-qwc)
@@ -209,9 +203,8 @@ main() {
         exit 0
     fi
     
-    if [ "$run_tests_flag" = true ]; then
-        run_tests
-    fi
+    # Always run tests before any deployment - deployment will fail if tests fail
+    run_tests
     
     build_project
     
