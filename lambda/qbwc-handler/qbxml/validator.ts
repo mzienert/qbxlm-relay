@@ -1,11 +1,7 @@
 import { XMLParser } from 'fast-xml-parser';
 import {
   QBXMLValidationResult,
-  QBXMLValidationError,
-  QBXMLValidationWarning,
   QBEntityType,
-  QBOperation,
-  QBXMLProcessingError,
   QBEntity,
   QBCustomer,
   QBItem,
@@ -63,7 +59,7 @@ export class QBXMLValidator {
       this.validateRequestElements(msgsRq, result, expectedEntityType);
 
     } catch (error) {
-      this.addError(result, 'xml', `Invalid XML: ${error.message}`, 'INVALID_XML');
+      this.addError(result, 'xml', `Invalid XML: ${error instanceof Error ? error.message : String(error)}`, 'INVALID_XML');
     }
 
     return result;
@@ -103,7 +99,7 @@ export class QBXMLValidator {
       this.validateResponseElements(msgsRs, result, expectedEntityType);
 
     } catch (error) {
-      this.addError(result, 'xml', `Invalid XML: ${error.message}`, 'INVALID_XML');
+      this.addError(result, 'xml', `Invalid XML: ${error instanceof Error ? error.message : String(error)}`, 'INVALID_XML');
     }
 
     return result;
@@ -201,7 +197,7 @@ export class QBXMLValidator {
     }
   }
 
-  private validateResponseElements(msgsRs: any, result: QBXMLValidationResult, expectedEntityType?: QBEntityType): void {
+  private validateResponseElements(msgsRs: any, result: QBXMLValidationResult, _expectedEntityType?: QBEntityType): void {
     // Get all response elements
     const responses = this.extractResponseElements(msgsRs);
     
@@ -211,7 +207,7 @@ export class QBXMLValidator {
     }
 
     for (const response of responses) {
-      this.validateSingleResponse(response, result, expectedEntityType);
+      this.validateSingleResponse(response, result, _expectedEntityType);
     }
   }
 
