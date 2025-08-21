@@ -6,7 +6,7 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as path from 'path';
-import { ServicesLayerConstruct } from './services-layer';
+import { ServicesLayerConstruct } from '../layers/services';
 
 export interface LambdaConstructProps {
   environment: string;

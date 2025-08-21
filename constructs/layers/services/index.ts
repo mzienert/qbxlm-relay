@@ -34,6 +34,6 @@ export class ServicesLayerConstruct extends Construct {
     // Tags
     cdk.Tags.of(this.layer).add('Project', 'qbxml-relay');
     cdk.Tags.of(this.layer).add('Environment', environment);
-    cdk.Tags.of(this.layer).add('Component', 'services-layer');
+    cdk.Tags.of(this.layer).add('Component', 'services');
   }
 }
