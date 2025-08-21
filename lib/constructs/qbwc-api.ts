@@ -16,7 +16,6 @@ export class QbwcApiConstruct extends Construct {
 
     const { environment, lambdaFunction } = props;
 
-
     // API Gateway for SOAP endpoint
     this.api = new apigateway.RestApi(this, 'QbwcRestApi', {
       restApiName: `qbxml-relay-api-${environment}`,
