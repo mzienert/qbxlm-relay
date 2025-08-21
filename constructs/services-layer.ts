@@ -21,13 +21,8 @@ export class ServicesLayerConstruct extends Construct {
         bundling: {
           image: lambda.Runtime.NODEJS_20_X.bundlingImage,
           command: [
-            'bash', '-c', [
-              'cp -r /asset-input/* /asset-output/',
-              'cd /asset-output',
-              'mkdir -p nodejs',
-              'cp -r * nodejs/',
-              'rm -rf nodejs/nodejs'
-            ].join(' && ')
+            'bash', '-c',
+            'mkdir -p /asset-output/nodejs && cp -r /asset-input/* /asset-output/nodejs/'
           ]
         }
       }),

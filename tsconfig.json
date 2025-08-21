@@ -28,7 +28,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "/opt/nodejs/*": ["./services/*"]
+    }
   },
   "include": [
     "*.ts",
