@@ -13,7 +13,7 @@ import {
   QBCreditCardInfo,
   QBInvoiceLineItem,
   QBXMLProcessingError
-} from './types';
+} from '../../../../lambda/qbwc-handler/types';
 
 export interface TransformedData<T = any> {
   originalData: any;

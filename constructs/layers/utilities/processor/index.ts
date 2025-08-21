@@ -1,6 +1,6 @@
-import { QBXMLValidator } from '/opt/nodejs/validator';
-import { QBXMLTransformer } from '/opt/nodejs/transformer';
-import { QBXMLErrorHandler } from '/opt/nodejs/error-handler';
+import { QBXMLValidator } from '../validator';
+import { QBXMLTransformer } from '../transformer';
+import { QBXMLErrorHandler } from '../error-handler';
 import {
   QBXMLProcessingResult,
   QBXMLProcessingOptions,
@@ -8,7 +8,7 @@ import {
   QBOperation,
   QBEntity,
   QBXMLProcessingError
-} from './types';
+} from '../../../../lambda/qbwc-handler/types';
 
 export interface QBXMLProcessorConfig {
   validationEnabled: boolean;

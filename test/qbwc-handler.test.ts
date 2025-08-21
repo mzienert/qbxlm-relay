@@ -3,11 +3,11 @@
  */
 
 import { APIGatewayProxyEvent } from 'aws-lambda';
-import { handler } from '../src/lambda/qbwc-handler/index';
+import { handler } from '../lambda/qbwc-handler/index';
 
 // Mock the dependencies
-jest.mock('../src/lambda/qbwc-handler/session-manager');
-jest.mock('../src/lambda/qbwc-handler/soap-service');
+jest.mock('../constructs/layers/services/session-manager');
+jest.mock('../constructs/layers/services/soap-service');
 
 describe('QBWC Handler', () => {
   const mockEvent: APIGatewayProxyEvent = {

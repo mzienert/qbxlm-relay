@@ -6,7 +6,7 @@ import {
   QBCustomer,
   QBItem,
   QBInvoice
-} from './types';
+} from '../../../../lambda/qbwc-handler/types';
 
 export class QBXMLValidator {
   private xmlParser: XMLParser;

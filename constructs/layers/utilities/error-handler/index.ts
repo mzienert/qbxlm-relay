@@ -4,7 +4,7 @@ import {
   QBEntityType,
   QBOperation,
   QBXMLProcessingResult
-} from './types';
+} from '../../../../lambda/qbwc-handler/types';
 
 export interface RetryOptions {
   maxRetries: number;
