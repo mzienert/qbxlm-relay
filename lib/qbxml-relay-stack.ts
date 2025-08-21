@@ -1,8 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import { QbwcApiConstruct } from './constructs/qbwc-api';
+import { DynamoDbConstruct } from './constructs/dynamodb';
 
 export interface QbxmlRelayStackProps extends cdk.StackProps {
   environment: string;
@@ -14,18 +14,9 @@ export class QbxmlRelayStack extends cdk.Stack {
 
     const { environment } = props;
 
-    // DynamoDB table for QBWC session management
-    const sessionsTable = new dynamodb.Table(this, 'QbwcSessionsTable', {
-      tableName: `qbxml-relay-sessions-${environment}`,
-      partitionKey: {
-        name: 'ticket',
-        type: dynamodb.AttributeType.STRING,
-      },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      timeToLiveAttribute: 'ttl',
-      removalPolicy: environment === 'prod' ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
-      // pointInTimeRecovery disabled - unnecessary for ephemeral session data with 24h TTL
-      pointInTimeRecovery: false,
+    // DynamoDB construct
+    const dynamoDb = new DynamoDbConstruct(this, 'DynamoDb', {
+      environment,
     });
 
     // CloudWatch Log Group for Lambda functions
@@ -38,7 +29,7 @@ export class QbxmlRelayStack extends cdk.Stack {
     // QBWC API Gateway + Lambda construct
     const qbwcApi = new QbwcApiConstruct(this, 'QbwcApi', {
       environment,
-      sessionsTable,
+      sessionsTable: dynamoDb.sessionsTable,
       logGroup,
     });
 
@@ -50,7 +41,7 @@ export class QbxmlRelayStack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, 'SessionsTableName', {
-      value: sessionsTable.tableName,
+      value: dynamoDb.sessionsTable.tableName,
       description: 'DynamoDB sessions table name',
       exportName: `qbxml-relay-sessions-table-${environment}`,
     });

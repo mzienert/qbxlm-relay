@@ -1,0 +1,57 @@
+need to sync invoice date
+what are we going to need to pull from qb?
+    duplicate checks - eg acc added to qb that is in zohocrm
+    need to figure out how platforms talk to each other
+    Last Invoice date
+        doesnt exist in qb
+        produce report that says give me active invoice for every customer for last 12 months
+        zach would delete all rows except for the last invoice
+        sean would import that spread sheet into chatgpt to clean up sheet
+        then imported sheet matching fields and bulk imported into zoho 
+        create an automation that says if an account has ordered in 2 months or greater then reach out
+        account created in crm or qb needs to be checked and created in qb or zoho
+        how to ask bi questions about sales data
+        dont have weight in pos system
+        if they had weight it would be easy to produce sales by weight volume, by total weight, by quantiy
+        they are currently doing that by title, not necesarrily the best way to do it
+        really need to figure out how to create a custom field in QB for last invoice date
+        perhaps consider turning on invoicing module in qb, could be beneficial for the crm side, have workflow automation
+        for things like who did we sell water filters to, when was the last time they purchased
+        water filter are big, when they replace a filter they need to go in and manually update the date
+
+        looking at at redshift or s3/glue/athena tables for data warehouse
+
+        eventually begin to explore forecasting
+
+        qb desktop enterprise deprecation
+
+        coffee roaster is access program
+
+        they have a db for green beans which is filemaker
+
+        coffee loses 16.7% during roasting
+        puts in how many batches per week, it adds it all up to calculate inventory and give insight
+        into time to OOS.  being used to anticipate capaicty to ensure no OOS until next shipment arrival
+        report tells him average over last 5 weeks.  brian goes in an enters into another sheet
+        then enters into another sheet heres how much coffee, prices, batches per week, then gets average
+        green cost and weighted average
+
+        would be incredible to just by putting in by inventory, if it could do pricing, amount that is being used
+        and then that information is just entered once, rather than in multiple places to get bi
+
+        not quite as streamlined as could be currently multiple sheets being joined
+
+        look at odoo crm - erp, crm, module based
+
+        get 38000 lbs at a time, would like to know whats available, what are the prices, what do we have
+        opportunity to anticipate green commitments
+
+        handful of big suppliers and then some smaller suppliers
+
+        eg 2027 already commited to 50% to provide reliability to farmers/suppliers
+
+        sometimes will push off more expensive blend and bring in cheaper. a lot of variability in green buying
+        looking for potential predicition
+
+        having chatgpt sort by lot codes code eg etu2404 lot number is on end etu is ethiopia would like to know
+        how many ethiopia baught in a given months
