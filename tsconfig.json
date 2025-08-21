@@ -33,7 +33,8 @@
   "include": [
     "*.ts",
     "constructs/**/*.ts",
-    "lambda/**/*.ts"
+    "lambda/**/*.ts",
+    "services/**/*.ts"
   ],
   "exclude": [
     "node_modules",

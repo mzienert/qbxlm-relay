@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { SoapService } from './soap-service';
+import { SoapService } from '../../services/soap-service';
 import { SessionManager } from './session-manager';
 
 const sessionManager = new SessionManager();

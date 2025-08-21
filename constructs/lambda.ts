@@ -6,6 +6,7 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { ServicesLayerConstruct } from './services-layer';
 
 export interface LambdaConstructProps {
   environment: string;
@@ -21,12 +22,18 @@ export class LambdaConstruct extends Construct {
 
     const { environment, sessionsTable, logGroup } = props;
 
+    // Create services layer
+    const servicesLayer = new ServicesLayerConstruct(this, 'ServicesLayer', {
+      environment,
+    });
+
     // Lambda function for QBWC handling
     this.qbwcHandler = new nodejs.NodejsFunction(this, 'QbwcHandler', {
       functionName: `qbxml-relay-qbwc-handler-${environment}`,
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: 'handler',
-      entry: path.join(process.cwd(), 'src/lambda/qbwc-handler/index.ts'),
+      entry: path.join(process.cwd(), 'lambda/qbwc-handler/index.ts'),
+      layers: [servicesLayer.layer],
       timeout: cdk.Duration.seconds(30),
       memorySize: 256,
       environment: {
