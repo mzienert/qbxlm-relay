@@ -31,7 +31,9 @@
     "resolveJsonModule": true
   },
   "include": [
-    "**/*.ts"
+    "*.ts",
+    "constructs/**/*.ts",
+    "lambda/**/*.ts"
   ],
   "exclude": [
     "node_modules",

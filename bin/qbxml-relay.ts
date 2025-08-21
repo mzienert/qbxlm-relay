@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { QbxmlRelayStack } from '../lib/qbxml-relay-stack';
+import { QbxmlRelayStack } from '../qbxml-relay-stack';
 
 const app = new cdk.App();
 
