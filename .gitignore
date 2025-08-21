@@ -62,3 +62,4 @@ cdk.context.json
 
 # Local development
 .local/
+PROPOSAL.md
