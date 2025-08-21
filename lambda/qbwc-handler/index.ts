@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { SoapService } from '/opt/nodejs/soap-service';
-import { SessionManager } from './session-manager';
+import { SessionManager } from '/opt/nodejs/session-manager';
 
 const sessionManager = new SessionManager();
 const soapService = new SoapService(sessionManager);

@@ -1,5 +1,5 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
-import { SessionManager } from '../lambda/qbwc-handler/session-manager';
+import { SessionManager } from '/opt/nodejs/session-manager';
 import { QBXMLProcessor } from '/opt/nodejs/processor';
 import { QBEntityType } from '../lambda/qbwc-handler/types';
 
