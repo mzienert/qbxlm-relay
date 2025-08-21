@@ -3,6 +3,7 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import { QbwcApiConstruct } from './constructs/qbwc-api';
 import { DynamoDbConstruct } from './constructs/dynamodb';
+import { LambdaConstruct } from './constructs/lambda';
 
 export interface QbxmlRelayStackProps extends cdk.StackProps {
   environment: string;
@@ -26,11 +27,17 @@ export class QbxmlRelayStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    // QBWC API Gateway + Lambda construct
-    const qbwcApi = new QbwcApiConstruct(this, 'QbwcApi', {
+    // Lambda construct
+    const lambdaFunctions = new LambdaConstruct(this, 'Lambda', {
       environment,
       sessionsTable: dynamoDb.sessionsTable,
       logGroup,
+    });
+
+    // QBWC API Gateway construct
+    const qbwcApi = new QbwcApiConstruct(this, 'QbwcApi', {
+      environment,
+      lambdaFunction: lambdaFunctions.qbwcHandler,
     });
 
     // Stack outputs
