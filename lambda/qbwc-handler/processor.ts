@@ -1,6 +1,6 @@
 import { QBXMLValidator } from './validator';
 import { QBXMLTransformer } from './transformer';
-import { QBXMLErrorHandler } from './error-handler';
+import { QBXMLErrorHandler } from '/opt/nodejs/error-handler';
 import {
   QBXMLProcessingResult,
   QBXMLProcessingOptions,
