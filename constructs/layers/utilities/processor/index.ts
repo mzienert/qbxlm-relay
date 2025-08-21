@@ -1,5 +1,5 @@
-import { QBXMLValidator } from './validator';
-import { QBXMLTransformer } from './transformer';
+import { QBXMLValidator } from '/opt/nodejs/validator';
+import { QBXMLTransformer } from '/opt/nodejs/transformer';
 import { QBXMLErrorHandler } from '/opt/nodejs/error-handler';
 import {
   QBXMLProcessingResult,
