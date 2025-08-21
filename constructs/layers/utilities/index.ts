@@ -17,7 +17,7 @@ export class UtilitiesLayerConstruct extends Construct {
     // Create Lambda Layer for shared utilities
     this.layer = new lambda.LayerVersion(this, 'UtilitiesLayer', {
       layerVersionName: `qbxml-relay-utilities-${environment}`,
-      code: lambda.Code.fromAsset('lib/utilities', {
+      code: lambda.Code.fromAsset('constructs/layers/utilities', {
         bundling: {
           image: lambda.Runtime.NODEJS_20_X.bundlingImage,
           command: [

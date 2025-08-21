@@ -17,7 +17,7 @@ export class ServicesLayerConstruct extends Construct {
     // Create Lambda Layer for shared services
     this.layer = new lambda.LayerVersion(this, 'ServicesLayer', {
       layerVersionName: `qbxml-relay-services-${environment}`,
-      code: lambda.Code.fromAsset('lib/services', {
+      code: lambda.Code.fromAsset('constructs/layers/services', {
         bundling: {
           image: lambda.Runtime.NODEJS_20_X.bundlingImage,
           command: [

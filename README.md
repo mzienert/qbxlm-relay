@@ -155,15 +155,36 @@ curl https://y8cis4na46.execute-api.us-west-1.amazonaws.com/dev/qbwc
 qbxml-relay/
 ├── bin/                          # CDK entry point
 │   └── qbxml-relay.ts
-├── lib/                          # CDK infrastructure code
-│   ├── qbxml-relay-stack.ts      # Main CDK stack
-│   └── constructs/
-│       └── qbwc-api.ts           # API Gateway + Lambda construct
+├── constructs/                   # CDK infrastructure constructs
+│   ├── dynamodb/
+│   │   └── index.ts             # DynamoDB table construct
+│   ├── lambda/
+│   │   └── index.ts             # Lambda function construct
+│   ├── qbwc-api/
+│   │   └── index.ts             # API Gateway construct
+│   └── layers/                  # Lambda layer constructs and source code
+│       ├── services/            # Business logic services layer
+│       │   ├── index.ts         # Services layer construct
+│       │   ├── session-manager/
+│       │   │   └── index.ts     # DynamoDB session management
+│       │   └── soap-service/
+│       │       └── index.ts     # SOAP service implementation
+│       └── utilities/           # Shared utilities layer
+│           ├── index.ts         # Utilities layer construct
+│           ├── error-handler/
+│           │   └── index.ts     # Error handling and retry logic
+│           ├── processor/
+│           │   └── index.ts     # QBXML processing pipeline
+│           ├── transformer/
+│           │   └── index.ts     # Data transformation utilities
+│           └── validator/
+│               └── index.ts     # QBXML validation utilities
 ├── lambda/                       # Lambda function code
 │   └── qbwc-handler/
 │       ├── index.ts              # Lambda entry point
-│       ├── soap-service.ts       # SOAP service implementation
-│       └── session-manager.ts    # DynamoDB session management
+│       └── types.ts              # Type definitions
+├── services/                     # Legacy service files (deprecated)
+├── qbxml-relay-stack.ts         # Main CDK stack
 ├── assets/                       # Configuration and mock data
 │   ├── mock-data/                # Sample QBXML data for testing
 │   ├── qbxml-relay.qwc          # Base QWC template
