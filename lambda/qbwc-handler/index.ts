@@ -5,6 +5,23 @@ import { SessionManager } from '../../constructs/layers/services/session-manager
 const sessionManager = new SessionManager();
 const soapService = new SoapService(sessionManager);
 
+function generateAppSupport(): string {
+  return `<?xml version="1.0" encoding="utf-8"?>
+<AppSupport>
+  <AppDisplayName>QBXML Relay Service (Development)</AppDisplayName>
+  <AppDescription>QuickBooks Desktop Enterprise to ZOHO CRM integration relay service (Development Environment). Synchronizes customer data between QuickBooks and ZOHO CRM.</AppDescription>
+  <AppUniqueName>qbxml-relay-dev</AppUniqueName>
+  <AppVersion>1.0.0</AppVersion>
+  <Owner>QBXML Relay Team</Owner>
+  <qbType>QBFS</qbType>
+  <AuthFlags>0x0</AuthFlags>
+  <Notify>0</Notify>
+  <PersonalDataPref>pdpOptional</PersonalDataPref>
+  <UnattendedModePref>umpOptional</UnattendedModePref>
+  <IsReadOnly>0</IsReadOnly>
+</AppSupport>`;
+}
+
 function generateWSDL(event: APIGatewayProxyEvent): string {
   const baseUrl = `https://${event.headers.Host}${event.requestContext.path}`;
   
@@ -238,19 +255,6 @@ function generateWSDL(event: APIGatewayProxyEvent): string {
     <port name="QBWebConnectorSvcSoap" binding="tns:QBWebConnectorSvcSoap">
       <soap:address location="${baseUrl}"/>
     </port>
-    <AppSupport>
-      <AppDisplayName>QBXML Relay Service (Development)</AppDisplayName>
-      <AppDescription>QuickBooks Desktop Enterprise to ZOHO CRM integration relay service (Development Environment). Synchronizes customer data between QuickBooks and ZOHO CRM.</AppDescription>
-      <AppUniqueName>qbxml-relay-dev</AppUniqueName>
-      <AppVersion>1.0.0</AppVersion>
-      <Owner>QBXML Relay Team</Owner>
-      <qbType>QBFS</qbType>
-      <AuthFlags>0x0</AuthFlags>
-      <Notify>0</Notify>
-      <PersonalDataPref>pdpOptional</PersonalDataPref>
-      <UnattendedModePref>umpOptional</UnattendedModePref>
-      <IsReadOnly>0</IsReadOnly>
-    </AppSupport>
   </service>
 </definitions>`;
 }
@@ -272,6 +276,65 @@ export const handler = async (
             'Content-Type': 'text/xml; charset=utf-8',
           },
           body: wsdl,
+        };
+      }
+      
+      // Return AppSupport if requested
+      if (event.queryStringParameters?.AppSupport !== undefined) {
+        const appSupport = generateAppSupport();
+        return {
+          statusCode: 200,
+          headers: {
+            'Content-Type': 'text/xml; charset=utf-8',
+          },
+          body: appSupport,
+        };
+      }
+      
+      // Handle support page
+      if (event.path?.endsWith('/support') || event.pathParameters?.proxy === 'support') {
+        return {
+          statusCode: 200,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+          },
+          body: `<!DOCTYPE html>
+<html>
+<head>
+    <title>QBXML Relay Support</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .header { color: #0077C5; }
+        .info { background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1 class="header">QBXML Relay Service Support</h1>
+    <div class="info">
+        <h2>Service Information</h2>
+        <p><strong>Application:</strong> QBXML Relay Service (Development)</p>
+        <p><strong>Version:</strong> 1.0.0</p>
+        <p><strong>Description:</strong> QuickBooks Desktop Enterprise to ZOHO CRM integration relay service</p>
+        <p><strong>Status:</strong> Active</p>
+    </div>
+    <div class="info">
+        <h2>Support Contact</h2>
+        <p>For technical support, please contact the QBXML Relay Team.</p>
+        <p><strong>Service URL:</strong> ${event.headers.Host}${event.requestContext.path}</p>
+        <p><strong>Environment:</strong> Development</p>
+    </div>
+    <div class="info">
+        <h2>Troubleshooting</h2>
+        <ul>
+            <li>Ensure QuickBooks Desktop is running</li>
+            <li>Verify network connectivity to the service endpoint</li>
+            <li>Check that the correct QWC file is installed</li>
+            <li>Confirm user credentials are correctly configured</li>
+        </ul>
+    </div>
+</body>
+</html>`,
         };
       }
       

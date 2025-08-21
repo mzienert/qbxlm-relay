@@ -48,6 +48,9 @@ export class QbwcApiConstruct extends Construct {
     // QBWC resource and method
     const qbwcResource = this.api.root.addResource('qbwc');
     
+    // Support resource
+    const supportResource = this.api.root.addResource('support');
+    
     // Lambda integration with proxy
     const lambdaIntegration = new apigateway.LambdaIntegration(lambdaFunction, {
       requestTemplates: {
@@ -108,6 +111,14 @@ export class QbwcApiConstruct extends Construct {
 
     // GET method for health check
     qbwcResource.addMethod('GET', lambdaIntegration, {
+      methodResponses: [
+        { statusCode: '200' },
+        { statusCode: '500' },
+      ],
+    });
+
+    // GET method for support page
+    supportResource.addMethod('GET', lambdaIntegration, {
       methodResponses: [
         { statusCode: '200' },
         { statusCode: '500' },

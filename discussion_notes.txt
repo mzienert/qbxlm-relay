@@ -55,3 +55,26 @@ what are we going to need to pull from qb?
 
         having chatgpt sort by lot codes code eg etu2404 lot number is on end etu is ethiopia would like to know
         how many ethiopia baught in a given months
+
+        8/21
+        elements to map from zoho
+             last invoice date - to trigger
+             annual revenue
+             invoicing history - crm access outside of billing
+             account object isn't built for invoicing but zoho has an 
+                invoicing module for an additional cost..maybe additional cost
+                look into how this will map
+
+            account info from qb and zoho - has mapping process already because they don't quite align
+            contacts object is its own module
+            seems like module in zoho === objects
+            contacts are leads or accounts
+            qb isn't great for managing multiple contacts
+            sop is to use contacts module and map them to account
+            contacts will be more complex in crm than in qb
+            more important to reference crm account 
+            most important aspect from quick books to zoho is acc name
+            double check whether it exists
+            invoice history
+            
+
