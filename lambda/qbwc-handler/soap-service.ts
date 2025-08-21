@@ -1,7 +1,7 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import { SessionManager } from './session-manager';
-import { QBXMLProcessor } from './qbxml/processor';
-import { QBEntityType } from './qbxml/types';
+import { QBXMLProcessor } from './processor';
+import { QBEntityType } from './types';
 
 export interface SoapMethodResult {
   methodName: string;
