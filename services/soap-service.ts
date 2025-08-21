@@ -1,6 +1,6 @@
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import { SessionManager } from '../lambda/qbwc-handler/session-manager';
-import { QBXMLProcessor } from '../lambda/qbwc-handler/processor';
+import { QBXMLProcessor } from '/opt/nodejs/processor';
 import { QBEntityType } from '../lambda/qbwc-handler/types';
 
 export interface SoapMethodResult {
